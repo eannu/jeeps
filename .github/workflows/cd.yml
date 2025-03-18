@@ -13,10 +13,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install dependencies
+      run: npm i
+
     - name: Build solution
-      # run: dotnet publish -c Release -o publish
-      cd: cd my-vite-app
-      build: npm run build
+      run: npm run build
 
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
@@ -24,4 +25,4 @@ jobs:
         app-name: jokuheieisaaollavalia
         slot-name: production
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ./publish
+        package: ./dist
